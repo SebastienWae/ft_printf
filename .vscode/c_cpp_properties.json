@@ -3,7 +3,7 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/srcs/**",
+                "${workspaceFolder}/include/**",
                 "/goinfre/swaegene/homebrew/include/**",
                 "/goinfre/swaegene/homebrew/include/criterion/**"
             ],
