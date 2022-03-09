@@ -8,10 +8,11 @@ CFLAGS := -Wall -Wextra -Werror
 ifdef MAKE_DEBUG
 	CFLAGS := -g3 -fsanitize=address
 endif
-CPPFLAGS := -I../srcs -I/goinfre/$(USER)/homebrew/include
-LDFLAGS :=  -L../srcs -lftprintf -L/goinfre/$(USER)/homebrew/lib -lcriterion
+CPPFLAGS := -I./include -I/goinfre/$(USER)/homebrew/include
+LDFLAGS :=  -L./src -lftprintf -L/goinfre/$(USER)/homebrew/lib -lcriterion
 
 $(NAME): $(OBJS)
+	$(MAKE) -C ../srcs
 
 run_test: $(NAME)
 	./$(NAME)

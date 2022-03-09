@@ -3,4 +3,4 @@
 .vscode/targets.log
 *.o
 *.a
-tests/test
+test/test
