@@ -5,7 +5,7 @@ AR := ar rus
 
 CC := gcc
 CFLAGS := -Wall -Wextra -Werror
-ifdef MAKE_DEBUG
+ifdef DEBUG
 	CFLAGS := -g3 -fsanitize=address
 endif
 CPPFLAGS := -I./include
