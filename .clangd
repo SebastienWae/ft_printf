@@ -1,0 +1,8 @@
+CompileFlags:
+  Add: [
+    -Wall,
+    -Werror,
+    -Wextra,
+    -I../include,
+    -I~/goinfre/homebrew/include
+  ]
