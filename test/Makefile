@@ -6,9 +6,9 @@ RM := rm -f
 CC := gcc
 CFLAGS := -Wall -Wextra -Werror
 CPPFLAGS := -I../include -I/goinfre/$(USER)/homebrew/include
-LDFLAGS :=  -L../ -lftprintf -L/goinfre/$(USER)/homebrew/lib -lcriterion
+LDFLAGS :=  -L../ -lftprintf -L/goinfre/$(USER)/homebrew/lib -lcriterion -L../libft -lft
 
-SRCS := test.c
+SRCS := $(wildcard *.c)
 OBJS := $(SRCS:.c=.o)
 
 $(NAME): $(OBJS)
