@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.test.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 16:42:11 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/11 18:00:32 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/03/11 22:51:09 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void    create_va(va_list *va_ptr, ...)
 
 void redirect_all_std(void)
 {
-    //cr_redirect_stdout();
+    cr_redirect_stdout();
   //    cr_redirect_stderr();
 }
 
@@ -106,6 +106,6 @@ Test(ft_print_conversion, print_pointer, .init = redirect_all_std) {
     char    *ptr;
 
     ptr = 0;
-    cr_expect(eq(i32, mock_printf("%p", ptr), 6));
-   // cr_assert_stdout_eq_str("0x0");
+    cr_expect(eq(i32, mock_printf("%p", ptr), 3));
+    cr_assert_stdout_eq_str("0x0");
 }
