@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert.c                                       :+:      :+:    :+:   */
+/*   ft_print_pointer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 15:23:41 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/10 17:42:56 by swaegene         ###   ########.fr       */
+/*   Created: 2022/03/11 14:06:10 by swaegene          #+#    #+#             */
+/*   Updated: 2022/03/11 18:22:54 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ft_printf.h>
 #include <libft.h>
 #include <unistd.h>
 
-int	ft_convert_s(char *s)
+int	ft_print_pointer(const char **f, void *ptr, t_flags flags)
 {
-	int	i;
+	char	s[9];
+	int		len;
+	(void)flags;
 
-	i = 0;
-	while (s[i])
-	{
-		ft_putchar_fd(s[i], STDOUT_FILENO);
-		i++;
-	}
-	return (i);
+	ft_itohex((unsigned long)(ptr), (char *)&s);
+	len = ft_strlen(s);
+	ft_putstr_fd("0x", STDOUT_FILENO);
+	ft_putstr_fd(s, STDOUT_FILENO);
+	*f += len;
+	return (3 + len);
 }
+

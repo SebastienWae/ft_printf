@@ -6,13 +6,12 @@
 /*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:53:29 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/10 18:11:51 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/03/11 16:45:21 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 #include <libft.h>
-#include <ft_convert.h>
 #include <stdarg.h>
 #include <unistd.h>
 
@@ -25,15 +24,23 @@ int	ft_is_format_flag(const char c)
 	return (0);
 }
 
-t_flags	ft_get_flags(const char **f, int *i)
+t_flags	init_flags(void)
 {
 	t_flags	flags;
 
 	flags.alternate_form = 0;
 	flags.left_blank = 0;
 	flags.plus_sign = 0;
+
+	return (flags);
+}
+
+t_flags	ft_get_flags(const char **f)
+{
+	t_flags	flags;
+
+	flags = init_flags();
 	(*f)++;
-	(*i)++;
 	while (ft_is_format_flag(**f))
 	{
 		if (**f == '#')
@@ -43,7 +50,6 @@ t_flags	ft_get_flags(const char **f, int *i)
 		else if (**f == '+')
 			flags.plus_sign = 1;
 		(*f)++;
-		(*i)++;
 	}
 	return (flags);
 }
@@ -57,29 +63,24 @@ t_flags	ft_get_flags(const char **f, int *i)
 //%x Prints a number in hexadecimal (base 16) lowercase format.
 //%X Prints a number in hexadecimal (base 16) uppercase format.
 //%% Prints a percent sign
-
 int	ft_print_conversion(const char **f, va_list va_ptr, t_flags flags)
 {
 	int	i;
 
-	i = 0;
 	(*f)++;
-	i++;
+	i = 0;
 	if (**f == 'c')
-	{
-		ft_putchar_fd((char)va_arg(va_ptr, int), STDOUT_FILENO);
-		(*f)++;
-		i++;
-	}
+		i = ft_print_char(f, va_arg(va_ptr, int), flags);
 	else if (**f == 's')
-		i = ft_convert_s(va_arg(va_ptr, char *));
+		i = ft_print_string(f, va_arg(va_ptr, char *), flags);
+	else if (**f == 'p')
+		i = ft_print_pointer(f, va_arg(va_ptr, void *), flags);
 	else
 	{
 		ft_putchar_fd(**f, STDOUT_FILENO);
 		(*f)++;
 		i++;
 	}
-	(void)flags;
 	return (i);
 }
 
@@ -97,7 +98,7 @@ int	ft_printf(const char *f, ...)
 		{
 			if (*f == '%')
 			{
-				flags = ft_get_flags(&f, &i);
+				flags = ft_get_flags(&f);
 				i += ft_print_conversion(&f, va_ptr, flags);
 			}
 			else
