@@ -6,7 +6,7 @@
 #    By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 19:06:03 by swaegene          #+#    #+#              #
-#    Updated: 2022/03/10 17:52:31 by swaegene         ###   ########.fr        #
+#    Updated: 2022/03/11 17:22:40 by swaegene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,16 @@ ifdef DEBUG
 endif
 CPPFLAGS := -I$(INC_DIR) -I./libft
 
-SRCS := ft_printf.c ft_convert.c
+SRCS := ft_printf.c ft_hex.c ft_print_char.c ft_print_pointer.c ft_print_string.c
 SRCS := $(addprefix $(SRC_DIR)/,$(SRCS))
 OBJS := $(SRCS:.c=.o)
 
 $(NAME): $(OBJS)
+ifdef DEBUG
+	$(MAKE) -C ./libft re
+else
 	$(MAKE) -C ./libft
+endif
 	$(AR) $(NAME) $(OBJS)
 
 all: $(NAME)

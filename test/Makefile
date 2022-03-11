@@ -5,6 +5,9 @@ RM := rm -f
 
 CC := gcc
 CFLAGS := -Wall -Wextra -Werror
+ifdef DEBUG
+	CFLAGS := -g3 -fsanitize=address
+endif
 CPPFLAGS := -I../include -I/goinfre/$(USER)/homebrew/include
 LDFLAGS :=  -L../ -lftprintf -L/goinfre/$(USER)/homebrew/lib -lcriterion -L../libft -lft
 
@@ -18,14 +21,6 @@ else
 	$(MAKE) -C ../
 endif
 	$(CC) $(OBJS) -o $@ $(CFLAGS) $(LDFLAGS)
-
-run_test: re
-	./$(NAME)
-
-debug_test: DEBUG = 1
-debug_test: CFLAGS := -g3 -fsanitize=address
-debug_test: re
-	./$(NAME)
 
 all: $(NAME)
 
