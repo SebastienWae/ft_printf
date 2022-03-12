@@ -10,6 +10,10 @@ ifdef DEBUG
 endif
 CPPFLAGS := -I../include -I/goinfre/$(USER)/homebrew/include
 LDFLAGS :=  -L../ -lftprintf -L/goinfre/$(USER)/homebrew/lib -lcriterion -L../libft -lft
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	LDFLAGS +=  -luuid
+endif
 
 SRCS := $(wildcard *.c)
 OBJS := $(SRCS:.c=.o)
