@@ -6,7 +6,7 @@
 /*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:07:47 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/12 13:13:09 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/03/12 14:55:49 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_dectohex(unsigned long dec)
 	}
 	else
 	{
-		hex = "0123456789ABCDEF";
+		hex = "0123456789abcdef";
 		s = ft_dectobase(dec, hex, 16);
 	}
 	return (s);
