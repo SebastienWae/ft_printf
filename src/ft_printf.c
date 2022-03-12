@@ -6,7 +6,7 @@
 /*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:53:29 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/12 13:05:32 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/03/12 14:05:09 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_flags	init_flags(void)
 	flags.alternate_form = 0;
 	flags.left_blank = 0;
 	flags.plus_sign = 0;
-
 	return (flags);
 }
 
@@ -66,20 +65,24 @@ int	ft_print_conversion(const char **f, va_list va_ptr, t_flags flags)
 {
 	int	i;
 
-	(*f)++;
 	i = 0;
+	(*f)++;
 	if (**f == 'c')
 		i = ft_print_char(f, va_arg(va_ptr, int), flags);
 	else if (**f == 's')
 		i = ft_print_string(f, va_arg(va_ptr, char *), flags);
 	else if (**f == 'p')
 		i = ft_print_pointer(f, va_arg(va_ptr, void *), flags);
+	else if (**f == 'd' || **f == 'i')
+		i = ft_print_decimal(f, va_arg(va_ptr, int), flags);
+	else if (**f == 'u')
+		i = ft_print_unsigned(f, va_arg(va_ptr, unsigned), flags);
+	else if (**f == 'x')
+		i = ft_print_hex_lower(f, va_arg(va_ptr, unsigned), flags);
+	else if (**f == 'X')
+		i = ft_print_hex_upper(f, va_arg(va_ptr, unsigned), flags);
 	else
-	{
-		ft_putchar_fd(**f, STDOUT_FILENO);
-		(*f)++;
-		i++;
-	}
+		i = ft_print_char(f, **f, flags);
 	return (i);
 }
 

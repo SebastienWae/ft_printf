@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.test.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 16:42:11 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/11 22:51:09 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/12 14:06:13 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@ int	mock_printf(const char *f, ...)
     i = ft_print_conversion(&f, va_ptr, flags);
     va_end(va_ptr);
     return (i);
-}
-
-void    create_va(va_list *va_ptr, ...)
-{
-    va_start(*va_ptr, va_ptr);
 }
 
 void redirect_all_std(void)
@@ -92,15 +87,15 @@ Test(ft_get_flags, multi_flags) {
     cr_expect(eq(i32, flags.plus_sign, 1));
 }
 
-//Test(ft_print_conversion, print_c, .init = redirect_all_std) {
-    //cr_expect(eq(i32, mock_printf("%c", 'c'), 1));
-    //cr_assert_stdout_eq_str("c");
-//}
+Test(ft_print_conversion, print_c, .init = redirect_all_std) {
+    cr_expect(eq(i32, mock_printf("%c", 'c'), 1));
+    cr_assert_stdout_eq_str("c");
+}
 
-//Test(ft_print_conversion, print_string, .init = redirect_all_std) {
-    //cr_expect(eq(i32, mock_printf("%s", "string"), 6));
-    //cr_assert_stdout_eq_str("string");
-//}
+Test(ft_print_conversion, print_string, .init = redirect_all_std) {
+    cr_expect(eq(i32, mock_printf("%s", "string"), 6));
+    cr_assert_stdout_eq_str("string");
+}
 
 Test(ft_print_conversion, print_pointer, .init = redirect_all_std) {
     char    *ptr;
@@ -108,4 +103,29 @@ Test(ft_print_conversion, print_pointer, .init = redirect_all_std) {
     ptr = 0;
     cr_expect(eq(i32, mock_printf("%p", ptr), 3));
     cr_assert_stdout_eq_str("0x0");
+}
+
+Test(ft_print_conversion, print_dec, .init = redirect_all_std) {
+    cr_expect(eq(i32, mock_printf("%d", 123), 3));
+    cr_assert_stdout_eq_str("123");
+}
+
+Test(ft_print_conversion, print_int, .init = redirect_all_std) {
+    cr_expect(eq(i32, mock_printf("%i", 123), 3));
+    cr_assert_stdout_eq_str("123");
+}
+
+Test(ft_print_conversion, print_unsigned, .init = redirect_all_std) {
+    cr_expect(eq(i32, mock_printf("%u", 123), 3));
+    cr_assert_stdout_eq_str("123");
+}
+
+Test(ft_print_conversion, print_hex_lower, .init = redirect_all_std) {
+    cr_expect(eq(i32, mock_printf("%x", 123), 2));
+    cr_assert_stdout_eq_str("7b");
+}
+
+Test(ft_print_conversion, print_hex_upper, .init = redirect_all_std) {
+    cr_expect(eq(i32, mock_printf("%X", 123), 2));
+    cr_assert_stdout_eq_str("7B");
 }

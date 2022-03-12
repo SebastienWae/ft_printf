@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_pointer.c                                 :+:      :+:    :+:   */
+/*   ft_print_decimal.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/11 14:06:10 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/12 13:21:38 by swaegene         ###   ########.fr       */
+/*   Created: 2022/03/12 13:22:33 by swaegene          #+#    #+#             */
+/*   Updated: 2022/03/12 13:36:58 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
 #include <libft.h>
+#include <ft_printf.h>
 
-int	ft_print_pointer(const char **f, void *ptr, t_flags flags)
+int	ft_print_decimal(const char **f, int dec, t_flags flags)
 {
 	char	*s;
-	int		len;
 
 	(void)flags;
-	s = ft_dectohex((unsigned long)(ptr));
-	len = ft_strlen(s);
-	ft_putstr_fd("0x", STDOUT_FILENO);
+	s = ft_itoa(dec);
 	ft_putstr_fd(s, STDOUT_FILENO);
-	free(s);
-	*f += len;
-	return (2 + len);
+	while (ft_isdigit(**f))
+		(*f)++;
+	return (ft_strlen(s));
 }

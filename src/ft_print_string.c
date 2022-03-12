@@ -6,7 +6,7 @@
 /*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:23:41 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/11 14:04:08 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/03/12 13:21:21 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 int	ft_print_string(const char **f, char *s, t_flags flags)
 {
 	int	i;
-	(void)flags;
 
+	(void)flags;
 	i = 0;
 	while (s[i])
 	{
