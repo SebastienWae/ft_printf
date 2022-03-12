@@ -6,7 +6,7 @@
 /*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:53:29 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/12 14:05:09 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/03/12 16:38:58 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,94 +14,44 @@
 #include <libft.h>
 #include <stdarg.h>
 
-int	ft_is_format_flag(const char c)
-{
-	if (c == '#'
-		|| c == ' '
-		|| c == '+')
-		return (1);
-	return (0);
-}
-
-t_flags	init_flags(void)
-{
-	t_flags	flags;
-
-	flags.alternate_form = 0;
-	flags.left_blank = 0;
-	flags.plus_sign = 0;
-	return (flags);
-}
-
-t_flags	ft_get_flags(const char **f)
-{
-	t_flags	flags;
-
-	flags = init_flags();
-	(*f)++;
-	while (ft_is_format_flag(**f))
-	{
-		if (**f == '#')
-			flags.alternate_form = 1;
-		else if (**f == ' ')
-			flags.left_blank = 1;
-		else if (**f == '+')
-			flags.plus_sign = 1;
-		(*f)++;
-	}
-	return (flags);
-}
-
-//%c Prints a single character.
-//%s Prints a string (as defined by the common C convention).
-//%p The void * pointer argument has to be printed in hexadecimal format.
-//%d Prints a decimal (base 10) number.
-//%i Prints an integer in base 10.
-//%u Prints an unsigned decimal (base 10) number.
-//%x Prints a number in hexadecimal (base 16) lowercase format.
-//%X Prints a number in hexadecimal (base 16) uppercase format.
-//%% Prints a percent sign
-int	ft_print_conversion(const char **f, va_list va_ptr, t_flags flags)
+int	ft_print_conversion(const char **f, va_list ap, t_flags flags)
 {
 	int	i;
 
 	i = 0;
-	(*f)++;
 	if (**f == 'c')
-		i = ft_print_char(f, va_arg(va_ptr, int), flags);
+		i = ft_print_char(f, va_arg(ap, int), flags);
 	else if (**f == 's')
-		i = ft_print_string(f, va_arg(va_ptr, char *), flags);
+		i = ft_print_string(f, va_arg(ap, char *), flags);
 	else if (**f == 'p')
-		i = ft_print_pointer(f, va_arg(va_ptr, void *), flags);
+		i = ft_print_pointer(f, va_arg(ap, void *), flags);
 	else if (**f == 'd' || **f == 'i')
-		i = ft_print_decimal(f, va_arg(va_ptr, int), flags);
+		i = ft_print_decimal(f, va_arg(ap, int), flags);
 	else if (**f == 'u')
-		i = ft_print_unsigned(f, va_arg(va_ptr, unsigned), flags);
+		i = ft_print_unsigned(f, va_arg(ap, unsigned int), flags);
 	else if (**f == 'x')
-		i = ft_print_hex_lower(f, va_arg(va_ptr, unsigned), flags);
+		i = ft_print_hex_lower(f, va_arg(ap, unsigned), flags);
 	else if (**f == 'X')
-		i = ft_print_hex_upper(f, va_arg(va_ptr, unsigned), flags);
+		i = ft_print_hex_upper(f, va_arg(ap, unsigned), flags);
 	else
 		i = ft_print_char(f, **f, flags);
 	return (i);
 }
 
-int	ft_printf(const char *f, ...)
+int	ft_vprintf(const char *f, va_list ap)
 {
 	int		i;
-	va_list	va_ptr;
 	t_flags	flags;
 
 	i = 0;
 	if (f)
 	{
-		va_start(va_ptr, f);
 		while (*f)
 		{
 			if (*f == '%')
 			{
 				flags = ft_get_flags(&f);
-				i += ft_print_conversion(&f, va_ptr, flags);
+				i += ft_print_conversion(&f, ap, flags);
 			}
 			else
 			{
@@ -110,7 +60,17 @@ int	ft_printf(const char *f, ...)
 				i++;
 			}
 		}
-		va_end(va_ptr);
 	}
+	return (i);
+}
+
+int	ft_printf(const char *f, ...)
+{
+	int		i;
+	va_list	ap;
+
+	va_start(ap, f);
+	i = ft_vprintf(f, ap);
+	va_end(ap);
 	return (i);
 }

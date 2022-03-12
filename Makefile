@@ -6,7 +6,7 @@
 #    By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 19:06:03 by swaegene          #+#    #+#              #
-#    Updated: 2022/03/12 14:06:38 by swaegene         ###   ########.fr        #
+#    Updated: 2022/03/12 16:22:46 by swaegene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ CPPFLAGS := -I$(INC_DIR) -I./libft
 
 SRCS := ft_printf.c ft_hex.c ft_print_char.c ft_print_pointer.c \
 		ft_print_string.c ft_print_decimal.c ft_print_unsigned.c \
-		ft_print_hex.c
+		ft_print_hex.c ft_flags.c
 SRCS := $(addprefix $(SRC_DIR)/,$(SRCS))
 OBJS := $(SRCS:.c=.o)
 

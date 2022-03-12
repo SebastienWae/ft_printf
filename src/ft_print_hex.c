@@ -6,7 +6,7 @@
 /*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:51:15 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/12 14:56:22 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/03/12 16:47:20 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	ft_print_hex_lower(const char **f, unsigned u, t_flags flags)
 	s = ft_dectohex(u);
 	ft_putstr_fd(s, STDOUT_FILENO);
 	len = ft_strlen(s);
-	*f += len;
+	free(s);
+	(*f)++;
 	return (len);
 }
 
@@ -42,6 +43,7 @@ int	ft_print_hex_upper(const char **f, unsigned u, t_flags flags)
 	}
 	ft_putstr_fd(s, STDOUT_FILENO);
 	len = ft_strlen(s);
-	*f += len;
+	free(s);
+	(*f)++;
 	return (len);
 }
