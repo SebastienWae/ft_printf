@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:51:04 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/11 22:13:26 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/12 13:11:14 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-
 typedef struct s_flags
 {
 	int	alternate_form;
@@ -32,6 +31,7 @@ int		ft_print_char(const char **f, int c, t_flags flags);
 int		ft_print_string(const char **f , char *s, t_flags flags);
 int		ft_print_pointer(const char **f, void *ptr, t_flags flags);
 
-char	*ft_itohex(unsigned long nb);
+char	*ft_dectobase(unsigned long dec, char *base, unsigned int base_size);
+char	*ft_dectohex(unsigned long nb);
 
 #endif

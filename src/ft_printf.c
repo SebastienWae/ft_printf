@@ -6,14 +6,13 @@
 /*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:53:29 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/11 16:45:21 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/03/12 13:05:32 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 #include <libft.h>
 #include <stdarg.h>
-#include <unistd.h>
 
 int	ft_is_format_flag(const char c)
 {

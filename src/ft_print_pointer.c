@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_pointer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:06:10 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/11 22:50:49 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/12 13:05:21 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 #include <libft.h>
-#include <unistd.h>
 
 int	ft_print_pointer(const char **f, void *ptr, t_flags flags)
 {
@@ -20,7 +19,7 @@ int	ft_print_pointer(const char **f, void *ptr, t_flags flags)
 	int		len;
 	(void)flags;
 
-	s = ft_itohex((unsigned long)(ptr));
+	s = ft_dectohex((unsigned long)(ptr));
 	len = ft_strlen(s);
 	ft_putstr_fd("0x", STDOUT_FILENO);
 	ft_putstr_fd(s, STDOUT_FILENO);
