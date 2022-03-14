@@ -1,24 +1,24 @@
-NAME := test
-
 USER := $(shell whoami)
 UNAME_S := $(shell uname -s)
 RM := rm -f
 
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS = -g3 -fsanitize=address -Wall -Werror -Wextra
 CPPFLAGS := -I../include -I/goinfre/$(USER)/homebrew/include
-LDFLAGS :=  -L../ -lftprintf -L../libft -lft -L/goinfre/$(USER)/homebrew/lib -lcmocka
+LDFLAGS :=  -L../debug -lftprintf -L/goinfre/$(USER)/homebrew/lib -lcmocka
 ifeq ($(UNAME_S),Linux)
 	LDFLAGS +=  -luuid
 endif
 
-SRCS := $(wildcard *.c)
+TESTS = ft_printf.test
+SRCS = $(addsuffix .c,$(TESTS))
 OBJS := $(SRCS:.c=.o)
 
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $@ $(CFLAGS) $(LDFLAGS)
+all: $(TESTS)
 
-all: $(NAME)
+%: %.c
+	$(CC) $< $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@ 
+	-./$@
 
 clean:
 	$(RM) $(OBJS)
@@ -26,4 +26,9 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 
+clean_logs:
+	$(RM) test.*.log
+
 re: fclean all
+
+.PHONY: all clean fclean re

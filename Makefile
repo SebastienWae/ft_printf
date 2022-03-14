@@ -3,37 +3,61 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+         #
+#    By: seb <seb@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 19:06:03 by swaegene          #+#    #+#              #
-#    Updated: 2022/03/13 15:06:06 by swaegene         ###   ########.fr        #
+#    Updated: 2022/03/14 12:39:21 by seb              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := libftprintf.a
+NAME = libftprintf.a
 
-RM := rm -f
-AR := ar rus
+LIBFT = libft.a
+MKDIR = mkdir
+RM = rm -f
+AR = ar rs
 
-SRC_DIR := ./src
-INC_DIR := ./include
-LIBFT_DIR := ./libft
+SRC_DIR = ./src/
+INC_DIR = ./include/
+LIBFT_DIR = ./libft/
+
+ifdef MAKE_DEBUG
+OUT_DIR = ./debug/
+NAME := $(OUT_DIR)$(NAME)
+DIRS += $(OUT_DIR)
+CFLAGS = -g3 -fsanitize=address
+else
+OUT_DIR = ./
+endif
 
 CC = gcc
-CFLAGS := -Wall -Wextra -Werror
-CPPFLAGS := -I$(INC_DIR) -I$(LIBFT_DIR)
+CFLAGS += -Wall -Werror -Wextra
+CPPFLAGS += -I$(INC_DIR) -I$(LIBFT_DIR)
 
-SRCS := ft_printf.c ft_hex.c ft_print_char.c ft_print_pointer.c \
+HEADERS = ft_printf.h
+HEADERS := $(addprefix $(INC_DIR),$(HEADERS))
+SRCS = ft_printf.c ft_hex.c ft_print_char.c ft_print_pointer.c \
 		ft_print_string.c ft_print_decimal.c ft_print_unsigned.c \
 		ft_print_hex.c ft_flags.c
-SRCS := $(addprefix $(SRC_DIR)/,$(SRCS))
-OBJS := $(SRCS:.c=.o)
-
-$(NAME): $(OBJS)
-	$(MAKE) -C $(LIBFT_DIR)
-	$(AR) $(NAME) $(OBJS)
+OBJS = $(addprefix $(OUT_DIR),$(SRCS:%.c=%.o))
 
 all: $(NAME)
+
+$(NAME): $(DIRS) $(OBJS) $(LIBFT_DIR)$(LIBFT) $(LIBFT)
+	$(AR) $(LIBFT) $(OBJS)
+	cp $(LIBFT) $(NAME)
+
+$(LIBFT_DIR)$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
+$(LIBFT):
+	cp $(LIBFT_DIR)libft.a $(OUT_DIR)
+
+$(OUT_DIR)%.o: $(SRC_DIR)%.c $(HEADERS)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $< -c -o $@
+
+$(DIRS):
+	$(MKDIR) "$@"
 
 clean:
 	$(RM) $(OBJS)
@@ -42,3 +66,5 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re
