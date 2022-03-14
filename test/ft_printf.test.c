@@ -129,22 +129,7 @@ static void test_printf(char *fmt, ...)
 }
 
 /* tests for %c */
-static void test_ft_printf_c_a_no_spaces(void **state)
-{
-    (void)state;
-    test_printf("%c", 'a');
-}
-static void test_ft_printf_c_a_space_before(void **state)
-{
-    (void)state;
-    test_printf(" %c", 'a');
-}
-static void test_ft_printf_c_a_space_after(void **state)
-{
-    (void)state;
-    test_printf("%c ", 'a');
-}
-static void test_ft_printf_c_a_space_arround(void **state)
+static void test_ft_printf_c_a(void **state)
 {
     (void)state;
     test_printf(" %c ", 'a');
@@ -162,31 +147,16 @@ static void test_ft_printf_c_5c(void **state)
 static void test_ft_printf_c_nulls(void **state)
 {
     (void)state;
-    test_printf("%c %c %c", NULL, NULL, 77);
+    test_printf(" %c %c %c ", NULL, NULL, 77);
 }
 
 /* tests for %s */
-static void test_ft_printf_s_empty_no_spaces(void **state)
-{
-    (void)state;
-    test_printf("%s", "");
-}
-static void test_ft_printf_s_empty_space_before(void **state)
-{
-    (void)state;
-    test_printf(" %s", "");
-}
-static void test_ft_printf_s_empty_space_after(void **state)
-{
-    (void)state;
-    test_printf("%s ", "");
-}
-static void test_ft_printf_s_empty_space_around(void **state)
+static void test_ft_printf_s_empty(void **state)
 {
     (void)state;
     test_printf(" %s ", "");
 }
-static void test_ft_printf_s_hello_space_around(void **state)
+static void test_ft_printf_s_hello(void **state)
 {
     (void)state;
     test_printf(" %s ", "hello");
@@ -218,12 +188,230 @@ static void test_ft_printf_s_nulls(void **state)
     test_printf(" %s %s %s %s", "", NULL, NULL, "123");
 }
 
+/* tests for %p */
+static void test_ft_printf_p_one(void **state)
+{
+    (void)state;
+    test_printf(" %p ", 1);
+}
+static void test_ft_printf_p_neg(void **state)
+{
+    (void)state;
+    test_printf(" %p ", -1);
+}
+static void test_ft_printf_p_max(void **state)
+{
+    (void)state;
+    test_printf(" %p ", ULONG_MAX);
+}
+static void test_ft_printf_p_5p(void **state)
+{
+    (void)state;
+    test_printf(" %p %p %p %p %p ", 1, 2, 3, 4, 5);
+}
+static void test_ft_printf_p_nulls(void **state)
+{
+    (void)state;
+    test_printf(" %p %p %p ", NULL, NULL, NULL );
+}
+
+/* tests for %d */
+static void test_ft_printf_d_zero(void **state)
+{
+    (void)state;
+    test_printf(" %d ", 0);
+}
+static void test_ft_printf_d_one(void **state)
+{
+    (void)state;
+    test_printf(" %d ", 1);
+}
+static void test_ft_printf_d_neg(void **state)
+{
+    (void)state;
+    test_printf(" %d ", -1);
+}
+static void test_ft_printf_d_5d(void **state)
+{
+    (void)state;
+    test_printf(" %d %d %d %d %d ", 1, 1234, 9482, 8, -134);
+}
+static void test_ft_printf_d_max(void **state)
+{
+    (void)state;
+    test_printf(" %d %d %d %d", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
+}
+static void test_ft_printf_d_nulls(void **state)
+{
+    (void)state;
+    test_printf(" %d %d %d %d", NULL, 1, NULL);
+}
+
+/* tests for %d */
+static void test_ft_printf_i_zero(void **state)
+{
+    (void)state;
+    test_printf(" %i ", 0);
+}
+static void test_ft_printf_i_one(void **state)
+{
+    (void)state;
+    test_printf(" %i ", 1);
+}
+static void test_ft_printf_i_neg(void **state)
+{
+    (void)state;
+    test_printf(" %i ", -1);
+}
+static void test_ft_printf_i_5i(void **state)
+{
+    (void)state;
+    test_printf(" %i %i %i %i %i ", 1, 1234, 9482, 8, -134);
+}
+static void test_ft_printf_i_max(void **state)
+{
+    (void)state;
+    test_printf(" %i %i %i %i", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
+}
+static void test_ft_printf_i_nulls(void **state)
+{
+    (void)state;
+    test_printf(" %i %i %i %i", NULL, 1, NULL);
+}
+
+/* tests for %u */
+static void test_ft_printf_u_zero(void **state)
+{
+    (void)state;
+    test_printf(" %u ", 0);
+}
+static void test_ft_printf_u_one(void **state)
+{
+    (void)state;
+    test_printf(" %u ", 1);
+}
+static void test_ft_printf_u_neg(void **state)
+{
+    (void)state;
+    test_printf(" %u ", -1);
+}
+static void test_ft_printf_u_5u(void **state)
+{
+    (void)state;
+    test_printf(" %u %u %u %u %u ", 1, 1234, 9482, 8, -134);
+}
+static void test_ft_printf_u_max(void **state)
+{
+    (void)state;
+    test_printf(" %u %u %u %u", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
+}
+static void test_ft_printf_u_nulls(void **state)
+{
+    (void)state;
+    test_printf(" %u %u %u %u", NULL, 1, NULL);
+}
+
+/* tests for %x */
+static void test_ft_printf_x_zero(void **state)
+{
+    (void)state;
+    test_printf(" %x ", 0);
+}
+static void test_ft_printf_x_one(void **state)
+{
+    (void)state;
+    test_printf(" %x ", 1);
+}
+static void test_ft_printf_x_neg(void **state)
+{
+    (void)state;
+    test_printf(" %x ", -1);
+}
+static void test_ft_printf_x_5x(void **state)
+{
+    (void)state;
+    test_printf(" %x %x %x %x %x ", 1, 1234, 9482, 8, -134);
+}
+static void test_ft_printf_x_max(void **state)
+{
+    (void)state;
+    test_printf(" %x %x %x %x", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
+}
+static void test_ft_printf_x_nulls(void **state)
+{
+    (void)state;
+    test_printf(" %x %x %x %x", NULL, 1, NULL);
+}
+
+/* tests for %X */
+static void test_ft_printf_X_zero(void **state)
+{
+    (void)state;
+    test_printf(" %X ", 0);
+}
+static void test_ft_printf_X_one(void **state)
+{
+    (void)state;
+    test_printf(" %X ", 1);
+}
+static void test_ft_printf_X_neg(void **state)
+{
+    (void)state;
+    test_printf(" %X ", -1);
+}
+static void test_ft_printf_X_5X(void **state)
+{
+    (void)state;
+    test_printf(" %X %X %X %X %X ", 1, 1234, 9482, 8, -134);
+}
+static void test_ft_printf_X_max(void **state)
+{
+    (void)state;
+    test_printf(" %X %X %X %X", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
+}
+static void test_ft_printf_X_nulls(void **state)
+{
+    (void)state;
+    test_printf(" %X %X %X %X", NULL, 1, NULL);
+}
+
+/* tests for %% */
+static void test_ft_printf_perc1(void **state)
+{
+    (void)state;
+    test_printf(" %% ");
+}
+static void test_ft_printf_perc2(void **state)
+{
+    (void)state;
+    test_printf(" %%%% ");
+}
+static void test_ft_printf_perc3(void **state)
+{
+    (void)state;
+    test_printf(" %% %% %% ");
+}
+static void test_ft_printf_perc4(void **state)
+{
+    (void)state;
+    test_printf(" %%  %%  %% ");
+}
+
+/* mix tests */
+static void test_ft_printf_mix1(void **state)
+{
+    (void)state;
+    test_printf("%%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %c%%", 'A', "42", 42, 42 ,42 , 42, 42, 'B', "-42", -42, -42 ,-42 ,-42, 42, 'C', "0", 0, 0 ,0 ,0, 42, 0);
+}
+static void test_ft_printf_mix2(void **state)
+{
+    (void)state;
+    test_printf("%%d%%d%X%% %% %d%u%i", 1, 2, 123); 
+}
+
 int main(void) {
     const struct CMUnitTest ft_printf_c_tests[] = {
-        cmocka_unit_test(test_ft_printf_c_a_no_spaces),
-        cmocka_unit_test(test_ft_printf_c_a_space_before),
-        cmocka_unit_test(test_ft_printf_c_a_space_after),
-        cmocka_unit_test(test_ft_printf_c_a_space_arround),
+        cmocka_unit_test(test_ft_printf_c_a),
         cmocka_unit_test(test_ft_printf_c_neg),
         cmocka_unit_test(test_ft_printf_c_5c),
         cmocka_unit_test(test_ft_printf_c_nulls),
@@ -231,11 +419,8 @@ int main(void) {
     cmocka_run_group_tests(ft_printf_c_tests, NULL, NULL);
 
     const struct CMUnitTest ft_printf_s_tests[] = {
-        cmocka_unit_test(test_ft_printf_s_empty_no_spaces),
-        cmocka_unit_test(test_ft_printf_s_empty_space_before),
-        cmocka_unit_test(test_ft_printf_s_empty_space_after),
-        cmocka_unit_test(test_ft_printf_s_empty_space_around),
-        cmocka_unit_test(test_ft_printf_s_hello_space_around),
+        cmocka_unit_test(test_ft_printf_s_empty),
+        cmocka_unit_test(test_ft_printf_s_hello),
         cmocka_unit_test(test_ft_printf_s_hello_empty),
         cmocka_unit_test(test_ft_printf_s_empty_hello),
         cmocka_unit_test(test_ft_printf_s_5s),
@@ -243,4 +428,77 @@ int main(void) {
         cmocka_unit_test(test_ft_printf_s_nulls),
     };
     cmocka_run_group_tests(ft_printf_s_tests, NULL, NULL);
+
+    const struct CMUnitTest ft_printf_p_tests[] = {
+        cmocka_unit_test(test_ft_printf_p_one),
+        cmocka_unit_test(test_ft_printf_p_neg),
+        cmocka_unit_test(test_ft_printf_p_max),
+        cmocka_unit_test(test_ft_printf_p_5p),
+        cmocka_unit_test(test_ft_printf_p_nulls),
+    };
+    cmocka_run_group_tests(ft_printf_p_tests, NULL, NULL);
+
+    const struct CMUnitTest ft_printf_d_tests[] = {
+        cmocka_unit_test(test_ft_printf_d_zero),
+        cmocka_unit_test(test_ft_printf_d_one),
+        cmocka_unit_test(test_ft_printf_d_neg),
+        cmocka_unit_test(test_ft_printf_d_max),
+        cmocka_unit_test(test_ft_printf_d_5d),
+        cmocka_unit_test(test_ft_printf_d_nulls),
+    };
+    cmocka_run_group_tests(ft_printf_d_tests, NULL, NULL);
+
+    const struct CMUnitTest ft_printf_i_tests[] = {
+        cmocka_unit_test(test_ft_printf_i_zero),
+        cmocka_unit_test(test_ft_printf_i_one),
+        cmocka_unit_test(test_ft_printf_i_neg),
+        cmocka_unit_test(test_ft_printf_i_max),
+        cmocka_unit_test(test_ft_printf_i_5i),
+        cmocka_unit_test(test_ft_printf_i_nulls),
+    };
+    cmocka_run_group_tests(ft_printf_i_tests, NULL, NULL);
+
+    const struct CMUnitTest ft_printf_u_tests[] = {
+        cmocka_unit_test(test_ft_printf_u_zero),
+        cmocka_unit_test(test_ft_printf_u_one),
+        cmocka_unit_test(test_ft_printf_u_neg),
+        cmocka_unit_test(test_ft_printf_u_max),
+        cmocka_unit_test(test_ft_printf_u_5u),
+        cmocka_unit_test(test_ft_printf_u_nulls),
+    };
+    cmocka_run_group_tests(ft_printf_u_tests, NULL, NULL);
+
+    const struct CMUnitTest ft_printf_x_tests[] = {
+        cmocka_unit_test(test_ft_printf_x_zero),
+        cmocka_unit_test(test_ft_printf_x_one),
+        cmocka_unit_test(test_ft_printf_x_neg),
+        cmocka_unit_test(test_ft_printf_x_max),
+        cmocka_unit_test(test_ft_printf_x_5x),
+        cmocka_unit_test(test_ft_printf_x_nulls),
+    };
+    cmocka_run_group_tests(ft_printf_x_tests, NULL, NULL);
+    
+    const struct CMUnitTest ft_printf_X_tests[] = {
+        cmocka_unit_test(test_ft_printf_X_zero),
+        cmocka_unit_test(test_ft_printf_X_one),
+        cmocka_unit_test(test_ft_printf_X_neg),
+        cmocka_unit_test(test_ft_printf_X_max),
+        cmocka_unit_test(test_ft_printf_X_5X),
+        cmocka_unit_test(test_ft_printf_X_nulls),
+    };
+    cmocka_run_group_tests(ft_printf_X_tests, NULL, NULL);
+
+    const struct CMUnitTest ft_printf_perc_tests[] = {
+        cmocka_unit_test(test_ft_printf_perc1),
+        cmocka_unit_test(test_ft_printf_perc2),
+        cmocka_unit_test(test_ft_printf_perc3),
+        cmocka_unit_test(test_ft_printf_perc4),
+    };
+    cmocka_run_group_tests(ft_printf_perc_tests, NULL, NULL);
+
+    const struct CMUnitTest ft_printf_mix_tests[] = {
+        cmocka_unit_test(test_ft_printf_mix1),
+        cmocka_unit_test(test_ft_printf_mix2),
+    };
+    cmocka_run_group_tests(ft_printf_mix_tests, NULL, NULL);
 }
