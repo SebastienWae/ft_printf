@@ -28,7 +28,7 @@ static int watch_start_fd(int fd, char **filepath)
     uuid_unparse_lower(bid, uuid);
 
     char filebuf[256];
-    sprintf(filebuf, "criterion.%s.log", uuid);
+    sprintf(filebuf, "test.%s.log", uuid);
 
     *filepath = strdup(filebuf);
     assert(*filepath != NULL);
@@ -129,11 +129,6 @@ static void test_printf(char *fmt, ...)
 }
 
 /* tests for %c */
-static void test_ft_printf_c_missing(void **state)
-{
-    (void)state;
-    test_printf("%c");
-}
 static void test_ft_printf_c_a_no_spaces(void **state)
 {
     (void)state;
@@ -171,11 +166,6 @@ static void test_ft_printf_c_nulls(void **state)
 }
 
 /* tests for %s */
-static void test_ft_printf_s_missing(void **state)
-{
-    (void)state;
-    test_printf("%s");
-}
 static void test_ft_printf_s_empty_no_spaces(void **state)
 {
     (void)state;
@@ -230,7 +220,6 @@ static void test_ft_printf_s_nulls(void **state)
 
 int main(void) {
     const struct CMUnitTest ft_printf_c_tests[] = {
-        cmocka_unit_test(test_ft_printf_c_missing),
         cmocka_unit_test(test_ft_printf_c_a_no_spaces),
         cmocka_unit_test(test_ft_printf_c_a_space_before),
         cmocka_unit_test(test_ft_printf_c_a_space_after),
@@ -242,7 +231,6 @@ int main(void) {
     cmocka_run_group_tests(ft_printf_c_tests, NULL, NULL);
 
     const struct CMUnitTest ft_printf_s_tests[] = {
-        cmocka_unit_test(test_ft_printf_s_missing),
         cmocka_unit_test(test_ft_printf_s_empty_no_spaces),
         cmocka_unit_test(test_ft_printf_s_empty_space_before),
         cmocka_unit_test(test_ft_printf_s_empty_space_after),
