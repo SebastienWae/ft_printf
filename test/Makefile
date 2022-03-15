@@ -4,8 +4,12 @@ RM := rm -f
 
 CC := gcc
 CFLAGS = -g3 -fsanitize=address -Wall -Werror -Wextra
-CPPFLAGS := -I../include -I/goinfre/$(USER)/homebrew/include
-LDFLAGS :=  -L../debug -lftprintf -L/goinfre/$(USER)/homebrew/lib -lcmocka
+CPPFLAGS := -I../include
+LDFLAGS :=  -L../debug -lftprintf -lcmocka
+ifeq ($(USER),swaegene)
+CPPFLAGS += -I/goinfre/$(USER)/homebrew/include
+LDFLAGS += -L/goinfre/$(USER)/homebrew/lib
+endif
 ifeq ($(UNAME_S),Linux)
 	LDFLAGS +=  -luuid
 endif

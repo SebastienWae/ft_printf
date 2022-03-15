@@ -4,3 +4,4 @@
 *.o
 *.a
 test/test
+*.dSYM

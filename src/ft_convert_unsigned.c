@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_string.c                                  :+:      :+:    :+:   */
+/*   ft_convert_unsigned.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 15:23:41 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/15 16:06:35 by seb              ###   ########.fr       */
+/*   Created: 2022/03/12 13:47:11 by swaegene          #+#    #+#             */
+/*   Updated: 2022/03/15 22:41:17 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
 #include <libft.h>
+#include <ft_printf.h>
 
-int	ft_print_string(const char **f, va_list ap, t_flags flags)
+char	*ft_convert_unsigned(const char **f, va_list ap)
 {
-	char	*s;
-	int		i;
+	unsigned	u;
+	char		*tmp;
+	char		*tmp2;
+	char		*str;
 
-	(void)flags;
-	s = va_arg(ap, char *);
-	i = 0;
-	if (!s)
-		s = "(null)";
-	while (s[i])
+	u = va_arg(ap, unsigned);
+	if (u > 2147483647)
 	{
-		ft_putchar_fd(s[i], STDOUT_FILENO);
-		i++;
+		tmp = ft_itoa(u / 10);
+		tmp2 = ft_itoa(u % 10);
+		str = ft_strappend(tmp, tmp2);
+		free(tmp);
+		free(tmp2);
 	}
+	else
+		str = ft_itoa(u);
 	(*f)++;
-	return (i);
+	return (str);
 }
+

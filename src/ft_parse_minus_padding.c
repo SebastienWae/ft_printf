@@ -14,5 +14,6 @@
 
 void	ft_parse_minus_padding(const char **f, t_flags *flags)
 {
+	(*f)++;
 	flags->minus_padding = ft_get_flag_arg(f);
 }

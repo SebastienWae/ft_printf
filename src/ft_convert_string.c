@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_pointer.c                                 :+:      :+:    :+:   */
+/*   ft_convert_string.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/11 14:06:10 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/15 16:06:00 by seb              ###   ########.fr       */
+/*   Created: 2022/03/10 15:23:41 by swaegene          #+#    #+#             */
+/*   Updated: 2022/03/15 22:35:59 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 #include <libft.h>
 
-int	ft_print_pointer(const char **f, va_list ap, t_flags flags)
+char	*ft_convert_string(const char **f, va_list ap)
 {
-	char	*s;
-	int		len;
+	int		i;
+	char	*str;
 
-	(void)flags;
-	s = ft_dectohex((unsigned long)(va_arg(ap, void *)));
-	len = ft_strlen(s);
-	ft_putstr_fd("0x", STDOUT_FILENO);
-	ft_putstr_fd(s, STDOUT_FILENO);
-	free(s);
+	i = 0;
+	str = va_arg(ap, char *);
+	if (!str)
+		str = ft_strdup("(null)");
+	else
+		str = ft_strdup(str);
 	(*f)++;
-	return (2 + len);
+	return (str);
 }

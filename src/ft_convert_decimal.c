@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_char.c                                    :+:      :+:    :+:   */
+/*   ft_convert_decimal.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 15:23:41 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/15 16:04:34 by seb              ###   ########.fr       */
+/*   Created: 2022/03/12 13:22:33 by swaegene          #+#    #+#             */
+/*   Updated: 2022/03/15 21:41:55 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
 #include <libft.h>
+#include <ft_printf.h>
 
-int	ft_print_char(const char **f, va_list ap, t_flags flags)
+char	*ft_convert_decimal(const char **f, va_list ap)
 {
-	(void)flags;
-	ft_putchar_fd((char)va_arg(ap, int), STDOUT_FILENO);
 	(*f)++;
-	return (1);
+	return (ft_itoa(va_arg(ap, int)));
 }

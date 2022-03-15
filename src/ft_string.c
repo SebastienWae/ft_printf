@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_decimal.c                                 :+:      :+:    :+:   */
+/*   ft_string.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 13:22:33 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/15 16:03:45 by seb              ###   ########.fr       */
+/*   Created: 2022/03/15 21:53:47 by seb               #+#    #+#             */
+/*   Updated: 2022/03/15 22:37:10 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
-#include <ft_printf.h>
 
-int	ft_print_decimal(const char **f, va_list ap, t_flags flags)
+char	*ft_strappend(char *src, char *appendix)
 {
-	char	*s;
-	int		len;
+	int		i;
+	char	*str;
 
-	(void)flags;
-	s = ft_itoa(va_arg(ap, int));
-	ft_putstr_fd(s, STDOUT_FILENO);
-	(*f)++;
-	len = ft_strlen(s);
-	free(s);
-	return (len);
+	str = malloc(sizeof(char) * (ft_strlen(src) + ft_strlen(appendix) + 1));
+	i = 0;
+	while (*src)
+		str[i++] = *src++;
+	while (*appendix)
+		str[i++] = *appendix++;
+	str[i] = 0;
+	return (str);
+}
+
+char	*ft_strprepend(char *src, char *prefix)
+{
+	return (ft_strappend(prefix, src));
 }

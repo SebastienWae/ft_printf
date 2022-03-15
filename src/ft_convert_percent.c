@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_zero_padding.c                            :+:      :+:    :+:   */
+/*   ft_convert_percent.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 16:22:19 by seb               #+#    #+#             */
-/*   Updated: 2022/03/15 17:11:15 by seb              ###   ########.fr       */
+/*   Created: 2022/03/10 15:23:41 by swaegene          #+#    #+#             */
+/*   Updated: 2022/03/15 22:14:06 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
+#include <libft.h>
 
-void	ft_parse_zero_padding(const char **f, t_flags *flags)
+char	*ft_convert_percent(const char **f, va_list ap)
 {
+	char	*str;
+
+	(void)ap;
+	str = ft_calloc(2, sizeof(char));
+	str[0] = '%';
 	(*f)++;
-	flags->zero_padding = ft_get_flag_arg(f);
+	return (str);
 }
