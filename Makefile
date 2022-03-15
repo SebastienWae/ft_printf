@@ -6,7 +6,7 @@
 #    By: seb <seb@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 19:06:03 by swaegene          #+#    #+#              #
-#    Updated: 2022/03/14 12:39:21 by seb              ###   ########.fr        #
+#    Updated: 2022/03/15 17:13:01 by seb              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,10 @@ HEADERS = ft_printf.h
 HEADERS := $(addprefix $(INC_DIR),$(HEADERS))
 SRCS = ft_printf.c ft_hex.c ft_print_char.c ft_print_pointer.c \
 		ft_print_string.c ft_print_decimal.c ft_print_unsigned.c \
-		ft_print_hex.c ft_flags.c
+		ft_print_hex.c ft_print_percentage.c ft_flags.c \
+		ft_parse_alternate_form.c ft_parse_dot_precision.c \
+		ft_parse_left_blank.c ft_parse_minus_padding.c ft_parse_plus_sign.c \
+		ft_parse_zero_padding.c
 OBJS = $(addprefix $(OUT_DIR),$(SRCS:%.c=%.o))
 
 all: $(NAME)
@@ -58,6 +61,10 @@ $(OUT_DIR)%.o: $(SRC_DIR)%.c $(HEADERS)
 
 $(DIRS):
 	$(MKDIR) "$@"
+
+norm:
+	-@norminette $(SRC_DIR)
+	-@norminette $(INC_DIR)
 
 clean:
 	$(RM) $(OBJS)

@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_unsigned.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:47:11 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/12 16:46:44 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/03/15 16:07:29 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 #include <ft_printf.h>
 
-int	ft_print_unsigned(const char **f, unsigned u, t_flags flags)
+int	ft_print_unsigned(const char **f, va_list ap, t_flags flags)
 {
-	int		len;
-	char	*tmp;
-	char	*s;
+	unsigned	u;
+	int			len;
+	char		*tmp;
+	char		*s;
 
 	(void)flags;
+	u = va_arg(ap, unsigned);
 	if (u > 2147483647)
 	{
 		tmp = ft_itoa(u / 10);

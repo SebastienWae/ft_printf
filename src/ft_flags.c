@@ -3,49 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_flags.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 15:35:29 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/12 15:35:49 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/03/15 17:16:54 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
+#include <libft.h>
 
-int	ft_is_format_flag(const char c)
+int	ft_hash_flag(char *key, char flag)
 {
-	if (c == '#'
-		|| c == ' '
-		|| c == '+')
-		return (1);
-	return (0);
+	return (ft_strchr(key, flag) - key);
 }
 
-t_flags	init_flags(void)
+t_flags	ft_init_flags(void)
 {
 	t_flags	flags;
 
 	flags.alternate_form = 0;
 	flags.left_blank = 0;
 	flags.plus_sign = 0;
+	flags.zero_padding = 0;
+	flags.minus_padding = 0;
+	flags.dot_precision = 0;
 	return (flags);
+}
+
+unsigned int	ft_get_flag_arg(const char **f)
+{
+	unsigned long long	arg;
+
+	(*f)++;
+	arg = 0;
+	while (ft_isdigit(**f))
+		arg = (arg * 10) + (*(*f)++ - '0');
+	return (arg);
 }
 
 t_flags	ft_get_flags(const char **f)
 {
-	t_flags	flags;
+	t_flags				flags;
+	static t_parse_flag	parse_flag[] = {ft_parse_alternate_form,
+		ft_parse_left_blank, ft_parse_plus_sign, ft_parse_zero_padding,
+		ft_parse_minus_padding, ft_parse_dot_precision};
 
-	flags = init_flags();
+	flags = ft_init_flags();
 	(*f)++;
-	while (ft_is_format_flag(**f))
-	{
-		if (**f == '#')
-			flags.alternate_form = 1;
-		else if (**f == ' ')
-			flags.left_blank = 1;
-		else if (**f == '+')
-			flags.plus_sign = 1;
-		(*f)++;
-	}
+	while (ft_strchr(F_FLAGS, **f))
+		parse_flag[ft_hash_flag(F_FLAGS, **f)](f, &flags);
 	return (flags);
 }
