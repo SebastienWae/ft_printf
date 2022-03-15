@@ -23,7 +23,7 @@ clean:
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(TESTS)
 
 clean_logs:
 	$(RM) test.*.log
