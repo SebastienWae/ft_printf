@@ -212,7 +212,9 @@ static void test_ft_printf_p_5p(void **state)
 static void test_ft_printf_p_nulls(void **state)
 {
     (void)state;
+#if defined __APPLE__
     test_printf(" %p %p %p ", NULL, NULL, NULL );
+#endif
 }
 
 /* tests for %d */
