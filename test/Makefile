@@ -10,7 +10,7 @@ ifeq ($(UNAME_S),Linux)
 	LDFLAGS +=  -luuid
 endif
 
-TESTS = ft_printf.test
+TESTS = ft_printf.test ft_dectohex.test
 SRCS = $(addsuffix .c,$(TESTS))
 OBJS := $(SRCS:.c=.o)
 
@@ -18,7 +18,6 @@ all: $(TESTS)
 
 %: %.c
 	$(CC) $< $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@ 
-	-./$@
 
 clean:
 	$(RM) $(OBJS)
