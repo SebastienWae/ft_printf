@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 15:35:29 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/16 16:48:26 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/16 17:41:46 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,12 @@ static t_f_flags	ft_init_f_flags(void)
 
 static void	init_parse_f_flags(t_parse_f_flag *arr)
 {
-
 	arr[minus_f_flag] = ft_parse_minus_padding;
 	arr[zero_f_flag] = ft_parse_zero_padding;
 	arr[dot_f_flag] = ft_parse_dot_precision;
-	arr[hash_f_flag] = 	ft_parse_alternate_form;
+	arr[hash_f_flag] = ft_parse_alternate_form;
 	arr[space_f_flag] = ft_parse_left_blank;
 	arr[plus_f_flag] = ft_parse_plus_sign;
-
 }
 
 t_f_flags	ft_get_f_flags(const char **f)

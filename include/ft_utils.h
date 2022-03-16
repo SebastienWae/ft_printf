@@ -19,5 +19,6 @@ char	*ft_strprepend(char *src, char *prefix);
 char	*ft_dectobase(unsigned long dec, char *base, unsigned int base_size);
 char	*ft_dectohex(unsigned long dec);
 
-#endif
+char	*ft_utoa(unsigned int nb);
 
+#endif

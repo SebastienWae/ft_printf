@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 09:45:58 by seb               #+#    #+#             */
-/*   Updated: 2022/03/16 16:50:51 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/16 17:42:41 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ int	ft_format_alternate_form(enum e_c_flags c_flag, t_f_flags f_flags)
 	int	i;
 
 	i = 0;
-	if (c_flag == x_c_flag) 
+	if (c_flag == x_c_flag)
 	{
-		if(f_flags.alternate_form)
+		if (f_flags.alternate_form)
 		{
 			ft_putstr_fd("0x", STDOUT_FILENO);
 			i += 2;
 		}
 	}
-	if (c_flag == X_c_flag) 
+	if (c_flag == X_c_flag)
 	{
-		if(f_flags.alternate_form)
+		if (f_flags.alternate_form)
 		{
 			ft_putstr_fd("0X", STDOUT_FILENO);
 			i += 2;
@@ -55,7 +55,7 @@ int	ft_format_alternate_form(enum e_c_flags c_flag, t_f_flags f_flags)
 	return (i);
 }
 
-int	ft_format_before(enum e_c_flags c_flag, t_f_flags f_flags, unsigned int size)
+int	ft_format_before(enum e_c_flags c_flag, t_f_flags f_flags, unsigned int s)
 {
 	int	i;
 
@@ -66,14 +66,14 @@ int	ft_format_before(enum e_c_flags c_flag, t_f_flags f_flags, unsigned int size
 		|| c_flag == x_c_flag
 		|| c_flag == X_c_flag)
 	{
-		while (f_flags.dot_precision > size)
+		while (f_flags.dot_precision > s)
 		{
 			ft_putchar_fd('0', STDOUT_FILENO);
 			i++;
 			f_flags.dot_precision--;
 		}
 	}
-	while (f_flags.field_width > (size + i) && !f_flags.minus_padding)
+	while (f_flags.field_width > (s + i) && !f_flags.minus_padding)
 	{
 		if (f_flags.zero_padding && !f_flags.is_precise)
 			ft_putchar_fd('0', STDOUT_FILENO);

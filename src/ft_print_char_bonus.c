@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:23:41 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/16 12:44:54 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/16 17:43:37 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <libft.h>
 #include <stdarg.h>
 
-int	ft_print_char(va_list ap,t_f_flags flags)
+int	ft_print_char(va_list ap, t_f_flags flags)
 {
 	int	len;
 
@@ -24,5 +24,4 @@ int	ft_print_char(va_list ap,t_f_flags flags)
 	ft_putchar_fd((unsigned char)va_arg(ap, int), STDOUT_FILENO);
 	len += ft_format_after(flags, len);
 	return (len);
-
 }

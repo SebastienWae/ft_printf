@@ -6,13 +6,13 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:22:19 by seb               #+#    #+#             */
-/*   Updated: 2022/03/16 13:16:25 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/16 17:43:20 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_flags.h>
 
-void	ft_parse_plus_sign(const char **f,t_f_flags *flags)
+void	ft_parse_plus_sign(const char **f, t_f_flags *flags)
 {
 	(*f)++;
 	flags->plus_sign = 1;

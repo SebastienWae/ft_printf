@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:53:29 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/16 12:27:23 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/16 17:57:07 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_printf(const char *f, ...)
 		while (*f)
 		{
 			if (*f == '%' && f[1] && (ft_strrchr(C_FLAGS, f[1])
-				|| ft_strchr(F_FLAGS, f[1]) || ft_isdigit(f[1])))
+					|| ft_strchr(F_FLAGS, f[1]) || ft_isdigit(f[1])))
 			{
 				f++;
 				i += ft_print_convert(&f, ap);

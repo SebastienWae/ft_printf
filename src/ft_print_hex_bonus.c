@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:51:15 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/16 16:10:29 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/16 17:44:12 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 #include <libft.h>
 #include <stdarg.h>
 
-
-
-int	ft_print_hex_lower(va_list ap,t_f_flags f_flags)
+int	ft_print_hex_lower(va_list ap, t_f_flags f_flags)
 {
 	char			*str;
 	int				len;
@@ -39,7 +37,7 @@ int	ft_print_hex_lower(va_list ap,t_f_flags f_flags)
 	return (len);
 }
 
-int	ft_print_hex_upper(va_list ap,t_f_flags f_flags)
+int	ft_print_hex_upper(va_list ap, t_f_flags f_flags)
 {
 	char			*str;
 	int				len;

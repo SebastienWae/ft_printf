@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:19:45 by seb               #+#    #+#             */
-/*   Updated: 2022/03/16 12:25:31 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/16 17:56:06 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include <stdarg.h>
 
 # define C_FLAGS "cspdiuxX%"
-# define C_FLAGS_LEN (sizeof(C_FLAGS) - 1)
+# define C_FLAGS_LEN 9
 # define F_FLAGS "-0.# +"
-# define F_FLAGS_LEN (sizeof(F_FLAGS) - 1)
+# define F_FLAGS_LEN 6
 
 enum	e_c_flags
 {
@@ -54,7 +54,6 @@ typedef struct s_f_flags
 	unsigned int	dot_precision;
 	unsigned int	field_width;
 }	t_f_flags;
-
 
 typedef int		(*t_print_convert)(va_list,t_f_flags);
 typedef void	(*t_parse_f_flag)(const char **,t_f_flags *);
