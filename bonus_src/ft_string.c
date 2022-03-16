@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_percent.c                               :+:      :+:    :+:   */
+/*   ft_string.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 15:23:41 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/15 22:14:06 by seb              ###   ########.fr       */
+/*   Created: 2022/03/15 21:53:47 by seb               #+#    #+#             */
+/*   Updated: 2022/03/15 22:37:10 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
 #include <libft.h>
 
-char	*ft_convert_percent(const char **f, va_list ap)
+char	*ft_strappend(char *src, char *appendix)
 {
+	int		i;
 	char	*str;
 
-	(void)ap;
-	str = ft_calloc(2, sizeof(char));
-	str[0] = '%';
-	(*f)++;
+	str = malloc(sizeof(char) * (ft_strlen(src) + ft_strlen(appendix) + 1));
+	i = 0;
+	while (*src)
+		str[i++] = *src++;
+	while (*appendix)
+		str[i++] = *appendix++;
+	str[i] = 0;
 	return (str);
+}
+
+char	*ft_strprepend(char *src, char *prefix)
+{
+	return (ft_strappend(prefix, src));
 }

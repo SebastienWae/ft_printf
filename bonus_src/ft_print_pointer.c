@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_unsigned.c                              :+:      :+:    :+:   */
+/*   ft_print_pointer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 13:47:11 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/15 22:41:17 by seb              ###   ########.fr       */
+/*   Created: 2022/03/11 14:06:10 by swaegene          #+#    #+#             */
+/*   Updated: 2022/03/16 10:16:39 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include <ft_printf.h>
+#include <libft.h>
 
-char	*ft_convert_unsigned(const char **f, va_list ap)
+int	ft_print_pointer(va_list ap,t_f_flags flags)
 {
-	unsigned	u;
-	char		*tmp;
-	char		*tmp2;
-	char		*str;
+	char	*str;
+	int		len;
 
-	u = va_arg(ap, unsigned);
-	if (u > 2147483647)
-	{
-		tmp = ft_itoa(u / 10);
-		tmp2 = ft_itoa(u % 10);
-		str = ft_strappend(tmp, tmp2);
-		free(tmp);
-		free(tmp2);
-	}
-	else
-		str = ft_itoa(u);
-	(*f)++;
-	return (str);
+	str = ft_dectohex((unsigned long)(va_arg(ap, void *)));
+	len = ft_strlen(str) + 2;
+	len += ft_format_before(p_c_flag, flags, len);
+	ft_putstr_fd("0x", STDOUT_FILENO);
+	ft_putstr_fd(str, STDOUT_FILENO);
+	len += ft_format_after(flags, len);
+	free(str);
+	return (len);
 }
-

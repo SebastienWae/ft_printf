@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_minus_padding.c                           :+:      :+:    :+:   */
+/*   ft_print_percent.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 16:22:19 by seb               #+#    #+#             */
-/*   Updated: 2022/03/16 10:21:09 by seb              ###   ########.fr       */
+/*   Created: 2022/03/10 15:23:41 by swaegene          #+#    #+#             */
+/*   Updated: 2022/03/16 10:16:36 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
+#include <libft.h>
 
-void	ft_parse_minus_padding(const char **f,t_f_flags *flags)
+int	ft_print_percent(va_list ap,t_f_flags flags)
 {
-	(*f)++;
-	flags->minus_padding = ft_get_f_flag_arg(f);
+	int	len;
+
+	(void)ap;
+	len = 1;
+	len += ft_format_before(percent_c_flag, flags, len);
+	ft_putchar_fd('%', STDOUT_FILENO);
+	len += ft_format_after(flags, len);
+	return (len);
+	return (1);
 }

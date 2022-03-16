@@ -3,7 +3,7 @@ UNAME_S := $(shell uname -s)
 RM := rm -f
 
 CC := gcc
-CFLAGS = -g3 -fsanitize=address -Wall -Werror -Wextra
+CFLAGS = -g3 -fsanitize=address
 CPPFLAGS := -I../include
 LDFLAGS :=  -L../debug -lftprintf -lcmocka
 ifeq ($(USER),swaegene)

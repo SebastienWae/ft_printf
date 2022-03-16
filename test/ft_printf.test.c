@@ -86,6 +86,7 @@ static char *watch_stop_fd(int fd, char *filepath, int save_fd)
     return (content);
 }
 
+
 static void watch_start(void)
 {
     save_out = watch_start_fd(STDOUT_FILENO, &file_out);
@@ -99,122 +100,107 @@ static void watch_stop(char **out, char **err)
     //*err = watch_stop_fd(STDERR_FILENO, file_err, save_err);
 }
 
-static void test_printf(char *fmt, ...)
-{
-    char *out, *err;
-    char *sys_out, *sys_err;
-    va_list ap;
-    va_list sys_ap;
-
-    va_start(ap, fmt);
-	va_copy(sys_ap, ap);
-
-    watch_start();
-    int len = ft_vprintf(fmt, ap);
-    watch_stop(&out, &err);
-
-    watch_start();
-    int sys_len = vprintf(fmt, sys_ap);
-	fflush(stdout);
-    //fflush(stderr);
-    watch_stop(&sys_out, &sys_err);
-
-    assert_string_equal(out, sys_out);
-    //assert_string_equal(err, sys_err);
-    assert_int_equal(len, sys_len);
-
-    //free(err);
-    free(out);
-    //free(sys_err);
-    free(sys_out);
-}
+#define TEST_PRINTF(f, ...) \
+        char *out, *err; \
+        char *sys_out, *sys_err; \
+        watch_start(); \
+        int len = ft_printf(f, ## __VA_ARGS__); \
+        watch_stop(&out, &err); \
+        watch_start(); \
+        int sys_len = printf(f, ## __VA_ARGS__); \
+        fflush(stdout); \
+        watch_stop(&sys_out, &sys_err); \
+        assert_string_equal(out, sys_out); \
+        assert_int_equal(len, sys_len); \
+        free(out); \
+        free(sys_out);
 
 /* tests for %c */
 static void test_ft_printf_c_a(void **state)
 {
     (void)state;
-    test_printf(" %c ", 'a');
+    TEST_PRINTF(" %c ", 'a');
 }
 static void test_ft_printf_c_neg(void **state)
 {
     (void)state;
-    test_printf(" %c ", -127);
+    TEST_PRINTF(" %c ", -127);
 }
 static void test_ft_printf_c_5c(void **state)
 {
     (void)state;
-    test_printf(" %c %c %c %c %c ", 1, 'T', -12, 'x', ' ');
+    TEST_PRINTF(" %c %c %c %c %c ", 1, 'T', -12, 'x', ' ');
 }
 static void test_ft_printf_c_nulls(void **state)
 {
     (void)state;
-    test_printf(" %c %c %c ", NULL, NULL, 77);
+    TEST_PRINTF(" %c %c %c ", NULL, NULL, 77);
 }
 
 /* tests for %s */
 static void test_ft_printf_s_empty(void **state)
 {
     (void)state;
-    test_printf(" %s ", "");
+    TEST_PRINTF(" %s ", "");
 }
 static void test_ft_printf_s_hello(void **state)
 {
     (void)state;
-    test_printf(" %s ", "hello");
+    TEST_PRINTF(" %s ", "hello");
 }
 static void test_ft_printf_s_hello_empty(void **state)
 {
     (void)state;
-    test_printf(" %s %s ", "hello", "");
+    TEST_PRINTF(" %s %s ", "hello", "");
 }
 static void test_ft_printf_s_empty_hello(void **state)
 {
     (void)state;
-    test_printf(" %s %s ", "", "hello");
+    TEST_PRINTF(" %s %s ", "", "hello");
 }
 static void test_ft_printf_s_5s(void **state)
 {
     (void)state;
-    test_printf(" %s %s %s %s %s", "", "hello", "  ", "123", "");
+    TEST_PRINTF(" %s %s %s %s %s", "", "hello", "  ", "123", "");
 }
 static void test_ft_printf_s_long(void **state)
 {
     char    *s = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus dapibus placerat. Suspendisse pretium viverra tincidunt. Vivamus id justo a lectus sollicitudin laoreet vel ac purus. Etiam dui est, placerat vel dui congue, posuere lacinia diam. Nullam aliquet dictum orci sit amet vehicula. Fusce hendrerit venenatis malesuada. Morbi elementum massa sit amet tincidunt sagittis. Aliquam risus dui, imperdiet at dui sit amet, dignissim sollicitudin velit. Nam varius ante neque, ut feugiat neque placerat sed.";
     (void)state;
-    test_printf(" %s %s %s %s %s", "", "hello", "  ", "123", s);
+    TEST_PRINTF(" %s %s %s %s %s", "", "hello", "  ", "123", s);
 }
 static void test_ft_printf_s_nulls(void **state)
 {
     (void)state;
-    test_printf(" %s %s %s %s", "", NULL, NULL, "123");
+    TEST_PRINTF(" %s %s %s %s", "", NULL, NULL, "123");
 }
 
 /* tests for %p */
 static void test_ft_printf_p_one(void **state)
 {
     (void)state;
-    test_printf(" %p ", 1);
+    TEST_PRINTF(" %p ", 1);
 }
 static void test_ft_printf_p_neg(void **state)
 {
     (void)state;
-    test_printf(" %p ", -1);
+    TEST_PRINTF(" %p ", -1);
 }
 static void test_ft_printf_p_max(void **state)
 {
     (void)state;
-    test_printf(" %p ", ULONG_MAX);
+    TEST_PRINTF(" %p ", ULONG_MAX);
 }
 static void test_ft_printf_p_5p(void **state)
 {
     (void)state;
-    test_printf(" %p %p %p %p %p ", 1, 2, 3, 4, 5);
+    TEST_PRINTF(" %p %p %p %p %p ", 1, 2, 3, 4, 5);
 }
 static void test_ft_printf_p_nulls(void **state)
 {
     (void)state;
 #if defined __APPLE__
-    test_printf(" %p %p %p ", NULL, NULL, NULL );
+    TEST_PRINTF(" %p %p %p ", NULL, NULL, NULL );
 #endif
 }
 
@@ -222,209 +208,209 @@ static void test_ft_printf_p_nulls(void **state)
 static void test_ft_printf_d_zero(void **state)
 {
     (void)state;
-    test_printf(" %d ", 0);
+    TEST_PRINTF(" %d ", 0);
 }
 static void test_ft_printf_d_one(void **state)
 {
     (void)state;
-    test_printf(" %d ", 1);
+    TEST_PRINTF(" %d ", 1);
 }
 static void test_ft_printf_d_neg(void **state)
 {
     (void)state;
-    test_printf(" %d ", -1);
+    TEST_PRINTF(" %d ", -1);
 }
 static void test_ft_printf_d_5d(void **state)
 {
     (void)state;
-    test_printf(" %d %d %d %d %d ", 1, 1234, 9482, 8, -134);
+    TEST_PRINTF(" %d %d %d %d %d ", 1, 1234, 9482, 8, -134);
 }
 static void test_ft_printf_d_max(void **state)
 {
     (void)state;
-    test_printf(" %d %d %d %d", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
+    TEST_PRINTF(" %d %d %d %d", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
 }
 static void test_ft_printf_d_nulls(void **state)
 {
     (void)state;
-    test_printf(" %d %d %d %d", NULL, 1, NULL);
+    TEST_PRINTF(" %d %d %d %d", NULL, 1, NULL);
 }
 
 /* tests for %d */
 static void test_ft_printf_i_zero(void **state)
 {
     (void)state;
-    test_printf(" %i ", 0);
+    TEST_PRINTF(" %i ", 0);
 }
 static void test_ft_printf_i_one(void **state)
 {
     (void)state;
-    test_printf(" %i ", 1);
+    TEST_PRINTF(" %i ", 1);
 }
 static void test_ft_printf_i_neg(void **state)
 {
     (void)state;
-    test_printf(" %i ", -1);
+    TEST_PRINTF(" %i ", -1);
 }
 static void test_ft_printf_i_5i(void **state)
 {
     (void)state;
-    test_printf(" %i %i %i %i %i ", 1, 1234, 9482, 8, -134);
+    TEST_PRINTF(" %i %i %i %i %i ", 1, 1234, 9482, 8, -134);
 }
 static void test_ft_printf_i_max(void **state)
 {
     (void)state;
-    test_printf(" %i %i %i %i", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
+    TEST_PRINTF(" %i %i %i %i", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
 }
 static void test_ft_printf_i_nulls(void **state)
 {
     (void)state;
-    test_printf(" %i %i %i %i", NULL, 1, NULL);
+    TEST_PRINTF(" %i %i %i %i", NULL, 1, NULL);
 }
 
 /* tests for %u */
 static void test_ft_printf_u_zero(void **state)
 {
     (void)state;
-    test_printf(" %u ", 0);
+    TEST_PRINTF(" %u ", 0);
 }
 static void test_ft_printf_u_one(void **state)
 {
     (void)state;
-    test_printf(" %u ", 1);
+    TEST_PRINTF(" %u ", 1);
 }
 static void test_ft_printf_u_neg(void **state)
 {
     (void)state;
-    test_printf(" %u ", -1);
+    TEST_PRINTF(" %u ", -1);
 }
 static void test_ft_printf_u_5u(void **state)
 {
     (void)state;
-    test_printf(" %u %u %u %u %u ", 1, 1234, 9482, 8, -134);
+    TEST_PRINTF(" %u %u %u %u %u ", 1, 1234, 9482, 8, -134);
 }
 static void test_ft_printf_u_max(void **state)
 {
     (void)state;
-    test_printf(" %u %u %u %u", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
+    TEST_PRINTF(" %u %u %u %u", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
 }
 static void test_ft_printf_u_nulls(void **state)
 {
     (void)state;
-    test_printf(" %u %u %u %u", NULL, 1, NULL);
+    TEST_PRINTF(" %u %u %u %u", NULL, 1, NULL);
 }
 
 /* tests for %x */
 static void test_ft_printf_x_zero(void **state)
 {
     (void)state;
-    test_printf(" %x ", 0);
+    TEST_PRINTF(" %x ", 0);
 }
 static void test_ft_printf_x_one(void **state)
 {
     (void)state;
-    test_printf(" %x ", 1);
+    TEST_PRINTF(" %x ", 1);
 }
 static void test_ft_printf_x_neg(void **state)
 {
     (void)state;
-    test_printf(" %x ", -1);
+    TEST_PRINTF(" %x ", -1);
 }
 static void test_ft_printf_x_5x(void **state)
 {
     (void)state;
-    test_printf(" %x %x %x %x %x ", 1, 1234, 9482, 8, -134);
+    TEST_PRINTF(" %x %x %x %x %x ", 1, 1234, 9482, 8, -134);
 }
 static void test_ft_printf_x_max(void **state)
 {
     (void)state;
-    test_printf(" %x %x %x %x", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
+    TEST_PRINTF(" %x %x %x %x", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
 }
 static void test_ft_printf_x_nulls(void **state)
 {
     (void)state;
-    test_printf(" %x %x %x %x", NULL, 1, NULL);
+    TEST_PRINTF(" %x %x %x %x", NULL, 1, NULL);
 }
 
 /* tests for %X */
 static void test_ft_printf_X_zero(void **state)
 {
     (void)state;
-    test_printf(" %X ", 0);
+    TEST_PRINTF(" %X ", 0);
 }
 static void test_ft_printf_X_one(void **state)
 {
     (void)state;
-    test_printf(" %X ", 1);
+    TEST_PRINTF(" %X ", 1);
 }
 static void test_ft_printf_X_neg(void **state)
 {
     (void)state;
-    test_printf(" %X ", -1);
+    TEST_PRINTF(" %X ", -1);
 }
 static void test_ft_printf_X_5X(void **state)
 {
     (void)state;
-    test_printf(" %X %X %X %X %X ", 1, 1234, 9482, 8, -134);
+    TEST_PRINTF(" %X %X %X %X %X ", 1, 1234, 9482, 8, -134);
 }
 static void test_ft_printf_X_max(void **state)
 {
     (void)state;
-    test_printf(" %X %X %X %X", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
+    TEST_PRINTF(" %X %X %X %X", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
 }
 static void test_ft_printf_X_nulls(void **state)
 {
     (void)state;
-    test_printf(" %X %X %X %X", NULL, 1, NULL);
+    TEST_PRINTF(" %X %X %X %X", NULL, 1, NULL);
 }
 
 /* tests for %% */
 static void test_ft_printf_perc1(void **state)
 {
     (void)state;
-    test_printf(" %% ");
+    TEST_PRINTF(" %% ");
 }
 static void test_ft_printf_perc2(void **state)
 {
     (void)state;
-    test_printf(" %%%% ");
+    TEST_PRINTF(" %%%% ");
 }
 static void test_ft_printf_perc3(void **state)
 {
     (void)state;
-    test_printf(" %% %% %% ");
+    TEST_PRINTF(" %% %% %% ");
 }
 static void test_ft_printf_perc4(void **state)
 {
     (void)state;
-    test_printf(" %%  %%  %% ");
+    TEST_PRINTF(" %%  %%  %% ");
 }
 
 /* mix tests */
 static void test_ft_printf_mix1(void **state)
 {
     (void)state;
-    test_printf("%%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %c%%", 'A', "42", 42, 42 ,42 , 42, 42, 'B', "-42", -42, -42 ,-42 ,-42, 42, 'C', "0", 0, 0 ,0 ,0, 42, 0);
+    TEST_PRINTF("%%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %c%%", 'A', "42", 42, 42 ,42 , 42, 42, 'B', "-42", -42, -42 ,-42 ,-42, 42, 'C', "0", 0, 0 ,0 ,0, 42, 0);
 }
 static void test_ft_printf_mix2(void **state)
 {
     (void)state;
-    test_printf("%%d%%d%X%% %% %d%u%i", 1, 2, 123); 
+    TEST_PRINTF("%%d%%d%X%% %% %d%u%i", 1, 2, 123); 
 }
 static void test_ft_printf_mix3(void **state)
 {
     (void)state;
-    test_printf("%5%");
+    TEST_PRINTF("%5%");
 }
 static void test_ft_printf_mix4(void **state)
 {
     (void)state;
-    test_printf("%c");
+    TEST_PRINTF("%c");
 }
 static void test_ft_printf_mix5(void **state)
 {
     (void)state;
-    test_printf("%%c");
+    TEST_PRINTF("%%c");
 }
 
 int main(void) {

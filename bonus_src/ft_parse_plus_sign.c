@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_decimal.c                               :+:      :+:    :+:   */
+/*   ft_parse_plus_sign.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 13:22:33 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/15 21:41:55 by seb              ###   ########.fr       */
+/*   Created: 2022/03/15 16:22:19 by seb               #+#    #+#             */
+/*   Updated: 2022/03/16 09:25:49 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include <ft_printf.h>
 
-char	*ft_convert_decimal(const char **f, va_list ap)
+void	ft_parse_plus_sign(const char **f,t_f_flags *flags)
 {
+	flags->plus_sign = 1;
 	(*f)++;
-	return (ft_itoa(va_arg(ap, int)));
 }

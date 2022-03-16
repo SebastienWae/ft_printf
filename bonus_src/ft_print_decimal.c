@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_pointer.c                               :+:      :+:    :+:   */
+/*   ft_print_decimal.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/11 14:06:10 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/15 22:01:04 by seb              ###   ########.fr       */
+/*   Created: 2022/03/12 13:22:33 by swaegene          #+#    #+#             */
+/*   Updated: 2022/03/16 10:16:25 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
 #include <libft.h>
+#include <ft_printf.h>
 
-char	*ft_convert_pointer(const char **f, va_list ap)
+int	ft_print_decimal(va_list ap,t_f_flags flags)
 {
-	char	*tmp;
 	char	*str;
+	int		len;
 
-	tmp = ft_dectohex((unsigned long)(va_arg(ap, void *)));
-	str = ft_strprepend(tmp, "0x");
-	free(tmp);
-	(*f)++;
-	return (str);
+	str = ft_itoa(va_arg(ap, int));
+	len = ft_strlen(str);
+	len += ft_format_before(d_c_flag, flags, len);
+	ft_putstr_fd(str, STDOUT_FILENO);
+	len += ft_format_after(flags, len);
+	free(str);
+	return (len);
 }

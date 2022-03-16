@@ -6,7 +6,7 @@
 #    By: seb <seb@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 19:06:03 by swaegene          #+#    #+#              #
-#    Updated: 2022/03/15 22:44:39 by seb              ###   ########.fr        #
+#    Updated: 2022/03/16 11:22:27 by seb              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,17 +36,17 @@ CPPFLAGS += -I$(INC_DIR) -I$(LIBFT_DIR)
 
 HEADERS = ft_printf.h
 HEADERS := $(addprefix $(INC_DIR),$(HEADERS))
-SRCS = ft_printf.c ft_hex.c ft_convert_char.c ft_convert_pointer.c \
-		ft_convert_string.c ft_convert_decimal.c ft_convert_unsigned.c \
-		ft_convert_hex.c ft_convert_percent.c ft_flags.c \
-		ft_parse_alternate_form.c ft_parse_dot_precision.c \
-		ft_parse_left_blank.c ft_parse_minus_padding.c ft_parse_plus_sign.c \
-		ft_parse_zero_padding.c ft_string.c
+SRCS = ft_printf.c ft_hex.c ft_flags.c ft_format.c ft_string.c ft_print_char.c \
+	ft_print_pointer.c ft_print_string.c ft_print_decimal.c ft_print_int.c \
+	ft_print_unsigned.c ft_print_hex.c ft_print_percent.c \
+	ft_parse_alternate_form.c ft_parse_dot_precision.c ft_parse_left_blank.c \
+	ft_parse_minus_padding.c ft_parse_plus_sign.c ft_parse_zero_padding.c
 OBJS = $(addprefix $(OUT_DIR),$(SRCS:%.c=%.o))
 
 all: $(NAME)
 
-bonus: all
+bonus: $(SRC_DIR) = ./bonus_src/
+bonus: $(NAME)
 
 $(NAME): $(DIRS) $(OBJS) $(LIBFT_DIR)$(LIBFT) $(LIBFT)
 	$(AR) $(LIBFT) $(OBJS)
