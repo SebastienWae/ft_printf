@@ -6,11 +6,12 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 15:35:29 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/16 09:38:53 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/16 16:48:26 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
+#include <ft_flags.h>
+#include <ft_parse.h>
 #include <libft.h>
 
 int	ft_hash_flag(char *key, char flag)
@@ -62,6 +63,8 @@ t_f_flags	ft_get_f_flags(const char **f)
 
 	f_flags = ft_init_f_flags();
 	init_parse_f_flags(parse_f_flags);
+	while (ft_strchr(F_FLAGS, **f))
+		parse_f_flags[ft_hash_flag(F_FLAGS, **f)](f, &f_flags);
 	while (ft_strchr(F_FLAGS, **f) || ft_isdigit(**f))
 	{
 		if (ft_isdigit(**f))

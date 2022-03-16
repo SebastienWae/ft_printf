@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_hex.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 14:07:47 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/12 16:10:06 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/03/16 12:40:27 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <libft.h>
+#include <stdlib.h>
 
 char	*ft_dectobase(unsigned long dec, char *base, unsigned int base_size)
 {

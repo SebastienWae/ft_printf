@@ -6,14 +6,14 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 16:22:19 by seb               #+#    #+#             */
-/*   Updated: 2022/03/16 09:25:49 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/16 13:16:05 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
+#include <ft_flags.h>
 
 void	ft_parse_left_blank(const char **f,t_f_flags *flags)
 {
-	flags->left_blank = 1;
 	(*f)++;
+	flags->left_blank = 1;
 }

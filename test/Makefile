@@ -1,11 +1,17 @@
-USER := $(shell whoami)
-UNAME_S := $(shell uname -s)
-RM := rm -f
+USER = $(shell whoami)
+UNAME_S = $(shell uname -s)
+RM = rm -f
 
-CC := gcc
+CC = gcc
+ifdef MAKE_DEBUG
 CFLAGS = -g3 -fsanitize=address
-CPPFLAGS := -I../include
-LDFLAGS :=  -L../debug -lftprintf -lcmocka
+LDFLAGS = -L../debug
+else
+CFLAGS = -g3
+LDFLAGS = -L../
+endif
+CPPFLAGS = -I../include
+LDFLAGS += -lftprintf -lcmocka
 ifeq ($(USER),swaegene)
 CPPFLAGS += -I/goinfre/$(USER)/homebrew/include
 LDFLAGS += -L/goinfre/$(USER)/homebrew/lib
@@ -14,7 +20,7 @@ ifeq ($(UNAME_S),Linux)
 	LDFLAGS +=  -luuid
 endif
 
-TESTS = ft_printf.test ft_dectohex.test
+TESTS = ft_printf.test ft_printf_bonus.test
 SRCS = $(addsuffix .c,$(TESTS))
 OBJS := $(SRCS:.c=.o)
 

@@ -6,12 +6,14 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:51:15 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/16 10:20:47 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/16 12:56:14 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ft_flags.h>
+#include <ft_utils.h>
 #include <libft.h>
-#include <ft_printf.h>
+#include <stdarg.h>
 
 int	ft_print_hex_lower(va_list ap,t_f_flags flags)
 {
@@ -21,9 +23,7 @@ int	ft_print_hex_lower(va_list ap,t_f_flags flags)
 	(void)flags;
 	str = ft_dectohex(va_arg(ap, unsigned));
 	len = ft_strlen(str);
-	len += ft_format_before(x_c_flag, flags, len);
 	ft_putstr_fd(str, STDOUT_FILENO);
-	len += ft_format_after(flags, len);
 	free(str);
 	return (len);
 }
@@ -34,6 +34,7 @@ int	ft_print_hex_upper(va_list ap,t_f_flags flags)
 	int		len;
 	int		i;
 
+	(void)flags;
 	str = ft_dectohex(va_arg(ap, unsigned));
 	i = 0;
 	while (str[i])
@@ -42,9 +43,7 @@ int	ft_print_hex_upper(va_list ap,t_f_flags flags)
 		i++;
 	}
 	len = ft_strlen(str);
-	len += ft_format_before(X_c_flag, flags, len);
 	ft_putstr_fd(str, STDOUT_FILENO);
-	len += ft_format_after(flags, len);
 	free(str);
 	return (len);
 }

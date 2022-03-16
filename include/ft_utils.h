@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_string.c                                        :+:      :+:    :+:   */
+/*   ft_utils.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 21:53:47 by seb               #+#    #+#             */
-/*   Updated: 2022/03/15 22:37:10 by seb              ###   ########.fr       */
+/*   Created: 2022/03/16 12:10:28 by seb               #+#    #+#             */
+/*   Updated: 2022/03/16 12:32:21 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#ifndef FT_UTILS_H
+# define FT_UTILS_H
 
-char	*ft_strappend(char *src, char *appendix)
-{
-	int		i;
-	char	*str;
+char	*ft_strappend(char *src, char *appendix);
+char	*ft_strprepend(char *src, char *prefix);
 
-	str = malloc(sizeof(char) * (ft_strlen(src) + ft_strlen(appendix) + 1));
-	i = 0;
-	while (*src)
-		str[i++] = *src++;
-	while (*appendix)
-		str[i++] = *appendix++;
-	str[i] = 0;
-	return (str);
-}
+char	*ft_dectobase(unsigned long dec, char *base, unsigned int base_size);
+char	*ft_dectohex(unsigned long dec);
 
-char	*ft_strprepend(char *src, char *prefix)
-{
-	return (ft_strappend(prefix, src));
-}
+#endif
+

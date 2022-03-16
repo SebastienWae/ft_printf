@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_minus_padding.c                           :+:      :+:    :+:   */
+/*   ft_print_char_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 16:22:19 by seb               #+#    #+#             */
-/*   Updated: 2022/03/16 10:21:09 by seb              ###   ########.fr       */
+/*   Created: 2022/03/10 15:23:41 by swaegene          #+#    #+#             */
+/*   Updated: 2022/03/16 12:44:54 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
+#include <ft_format_bonus.h>
+#include <ft_flags.h>
+#include <libft.h>
+#include <stdarg.h>
 
-void	ft_parse_minus_padding(const char **f,t_f_flags *flags)
+int	ft_print_char(va_list ap,t_f_flags flags)
 {
-	(*f)++;
-	flags->minus_padding = ft_get_f_flag_arg(f);
+	int	len;
+
+	len = 1;
+	len += ft_format_before(c_c_flag, flags, len);
+	ft_putchar_fd((unsigned char)va_arg(ap, int), STDOUT_FILENO);
+	len += ft_format_after(flags, len);
+	return (len);
+
 }

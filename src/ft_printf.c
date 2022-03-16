@@ -6,11 +6,12 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:53:29 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/16 11:13:18 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/16 12:27:23 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
+#include <ft_flags.h>
+#include <ft_print_convert.h>
 #include <libft.h>
 #include <stdarg.h>
 

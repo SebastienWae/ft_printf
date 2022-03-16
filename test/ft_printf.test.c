@@ -397,21 +397,6 @@ static void test_ft_printf_mix2(void **state)
     (void)state;
     TEST_PRINTF("%%d%%d%X%% %% %d%u%i", 1, 2, 123); 
 }
-static void test_ft_printf_mix3(void **state)
-{
-    (void)state;
-    TEST_PRINTF("%5%");
-}
-static void test_ft_printf_mix4(void **state)
-{
-    (void)state;
-    TEST_PRINTF("%c");
-}
-static void test_ft_printf_mix5(void **state)
-{
-    (void)state;
-    TEST_PRINTF("%%c");
-}
 
 int main(void) {
     const struct CMUnitTest ft_printf_c_tests[] = {
@@ -503,9 +488,6 @@ int main(void) {
     const struct CMUnitTest ft_printf_mix_tests[] = {
         cmocka_unit_test(test_ft_printf_mix1),
         cmocka_unit_test(test_ft_printf_mix2),
-        cmocka_unit_test(test_ft_printf_mix3),
-        cmocka_unit_test(test_ft_printf_mix4),
-        cmocka_unit_test(test_ft_printf_mix5),
     };
     cmocka_run_group_tests(ft_printf_mix_tests, NULL, NULL);
 }

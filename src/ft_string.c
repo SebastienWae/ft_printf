@@ -6,11 +6,12 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 21:53:47 by seb               #+#    #+#             */
-/*   Updated: 2022/03/15 22:37:10 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/16 12:57:13 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
+#include <stdlib.h>
 
 char	*ft_strappend(char *src, char *appendix)
 {
