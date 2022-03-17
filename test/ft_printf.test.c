@@ -233,7 +233,7 @@ static void test_ft_printf_d_max(void **state)
 static void test_ft_printf_d_nulls(void **state)
 {
     (void)state;
-    TEST_PRINTF(" %d %d %d %d", NULL, 1, NULL);
+    TEST_PRINTF(" %d %d %d", NULL, 1, NULL);
 }
 
 /* tests for %d */
@@ -265,7 +265,7 @@ static void test_ft_printf_i_max(void **state)
 static void test_ft_printf_i_nulls(void **state)
 {
     (void)state;
-    TEST_PRINTF(" %i %i %i %i", NULL, 1, NULL);
+    TEST_PRINTF(" %i %i %i ", NULL, 1, NULL);
 }
 
 /* tests for %u */
@@ -297,7 +297,7 @@ static void test_ft_printf_u_max(void **state)
 static void test_ft_printf_u_nulls(void **state)
 {
     (void)state;
-    TEST_PRINTF(" %u %u %u %u", NULL, 1, NULL);
+    TEST_PRINTF(" %u %u %u", NULL, 1, NULL);
 }
 
 /* tests for %x */
@@ -329,7 +329,7 @@ static void test_ft_printf_x_max(void **state)
 static void test_ft_printf_x_nulls(void **state)
 {
     (void)state;
-    TEST_PRINTF(" %x %x %x %x", NULL, 1, NULL);
+    TEST_PRINTF(" %x %x %x ", NULL, 1, NULL);
 }
 
 /* tests for %X */
@@ -361,7 +361,7 @@ static void test_ft_printf_X_max(void **state)
 static void test_ft_printf_X_nulls(void **state)
 {
     (void)state;
-    TEST_PRINTF(" %X %X %X %X", NULL, 1, NULL);
+    TEST_PRINTF(" %X %X %X ", NULL, 1, NULL);
 }
 
 /* tests for %% */
@@ -395,7 +395,7 @@ static void test_ft_printf_mix1(void **state)
 static void test_ft_printf_mix2(void **state)
 {
     (void)state;
-    TEST_PRINTF("%%d%%d%X%% %% %d%u%i", 1, 2, 123); 
+    TEST_PRINTF("%%d%%d%X%% %% %d%u%i", 1, 2, 123, 0, NULL, -123); 
 }
 
 int main(void) {
