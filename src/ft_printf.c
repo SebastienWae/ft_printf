@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:53:29 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/16 17:57:07 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/17 13:25:39 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,13 @@ int	ft_printf(const char *f, ...)
 	{
 		while (*f)
 		{
-			if (*f == '%' && f[1] && (ft_strrchr(C_FLAGS, f[1])
-					|| ft_strchr(F_FLAGS, f[1]) || ft_isdigit(f[1])))
-			{
-				f++;
+			f++;
+			if (*(f - 1) == '%' && *f && (ft_strrchr(C_FLAGS, *f)
+					|| ft_strchr(F_FLAGS, *f) || ft_isdigit(*f)))
 				i += ft_print_convert(&f, ap);
-			}
-			else
+			else if (*(f - 1) != '%')
 			{
-				ft_putchar_fd(*f, STDOUT_FILENO);
-				f++;
+				ft_putchar_fd(*(f - 1), STDOUT_FILENO);
 				i++;
 			}
 		}
